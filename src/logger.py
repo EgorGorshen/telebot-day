@@ -29,3 +29,9 @@ class Logger:
                 raise e  # re-raise the caught exception after logging it
 
         return wrapper
+
+    def class_log(self, cls):
+        for name, method in cls.__dict__.items():
+            if callable(method):
+                setattr(cls, name, self.log_function_call(method))
+        return cls
