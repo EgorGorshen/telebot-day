@@ -30,22 +30,11 @@ class DB:
         self._del_todo_list_table()
 
     def _init_todo_list_table(self) -> None:
-        if self._db_exist():
-            return
         cursor = self.conn.cursor()
         cursor.execute(CREATE_TODO_LIST_TABLE)
         self.conn.commit()
 
-    def _db_exist(self):
-        if self.db_path == ":memory:":
-            return False
-        if os.path.exists(self.db_path):
-            return True
-        return False
-
     def _del_todo_list_table(self):
-        if not self._db_exist():
-            return
         cursor = self.conn.cursor()
         cursor.execute(DEL_TODO_LIST_TABLE)
         self.conn.commit()

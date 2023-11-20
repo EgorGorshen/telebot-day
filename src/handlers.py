@@ -11,7 +11,7 @@ from src.db import DB
 
 user_router = Router()
 user_log = Logger("user_log", "log/user.log")
-DATA_BASE = DB()
+DATA_BASE = DB("todo.db")
 
 
 @user_router.message(CommandStart())
@@ -54,10 +54,10 @@ async def add_todo_level(callback: CallbackQuery, state: FSMContext):
     data = await state.get_data()
     await state.clear()
 
-    a = DATA_BASE.add_todo(data["text"], Level(int(data["level"])))
+    DATA_BASE.add_todo(data["text"], Level(int(data["level"])))
 
     await callback.message.edit_text(
-        f"Добавили: [{Level(int(data['level'])).name}] + {a}"
+        f"Добавили: [{Level(int(data['level'])).name}] {data['text']}"
     )
 
 
