@@ -27,3 +27,19 @@ TASK_LEVEL = InlineKeyboardMarkup(
         ],
     ]
 )
+
+TODO_LIST = lambda todo_list: InlineKeyboardMarkup(
+    inline_keyboard=[
+        [InlineKeyboardButton(text=task[1], callback_data=str(task[0]))]
+        for task in todo_list
+    ]
+)
+
+SELECT_TASK_DONE = InlineKeyboardMarkup(
+    inline_keyboard=[
+        [
+            InlineKeyboardButton(text="✅", callback_data="1"),
+            InlineKeyboardButton(text="❌", callback_data="0"),
+        ],
+    ]
+)
